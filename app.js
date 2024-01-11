@@ -4,8 +4,6 @@
 // I want there to be three tries until i have to restart the game and start over
 const card = document.getElementById("card-container")
    card.addEventListener("click",(event) => {
-    if(event.target.classList.contains("cards"))
+    if(event.target.classList.toggle("cards"))
         alert("you clicked a card")
    })
-
-
