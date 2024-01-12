@@ -11,21 +11,22 @@ text-align: center;
     flex-wrap: wrap;
     padding: 180px;
     border-color: black;
-    
+    max-width: 80%;
 }
 
-.cards {
+.card {
     border: solid black;
     align-content: space-around;
     margin-left: auto;
     margin-right: auto;
-    padding: 100px;
+    padding: 80px;
     margin-top: 10px;
     background-color: cadetblue;
-    
-
+    max-height: 300px;
+    max-width: 150px;
 }
 
-img {
-    width: 100%;
+.card-img {
+    max-width: 100%;
+    max-height: 100%;
 }

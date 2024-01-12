@@ -2,8 +2,64 @@
 // If the cards do not match I want them to turn back around
 // If the cards do match I want them to stay flipped over 
 // I want there to be three tries until i have to restart the game and start over
-const card = document.getElementById("card-container")
-   card.addEventListener("click",(event) => {
-    if(event.target.classList.toggle("cards"))
-        alert("you clicked a card")
-   })
+
+// array of images
+const imageArray = [
+{ 
+   path:"assets/animal-7388186_1280.jpg",
+   name:"lemur",
+},
+{
+   path:"assets/cat-3169476_1280.jpg",
+   name: "cat",
+},
+{
+   path:"assets/dog-7758887_1280.webp",
+   name:"dog",
+},
+{
+   path:"assets/ireland-1985088_1280.jpg",
+   name:"sheep",
+},
+{
+   path:"assets/lamb-292512_1280.jpg",
+   name:"lamb",
+},
+{
+   path:"assets/meerkat-4821484_1280.jpg",
+   name:"meerkat",
+}
+]
+
+// create a function that will randomize my cards 
+// function randomImage (imageArray) {
+//    imageArray[Math.floor(Math.random()* imageArray.length)]
+// }
+
+
+const cardContainer = document.getElementById("card-container")
+
+// 
+//    card.addEventListener("click",(event) => {
+//     if(event.target.classList.toggle("card"))
+//         alert("you clicked a card")
+//    })
+
+function makeCard(img) {
+   // make card div
+   const card = document.createElement('div')
+   card.classList.add('card')
+   // make image
+   const newImage = document.createElement("img")
+   newImage.setAttribute('src', img.path)
+   newImage.setAttribute('alt', img.name)
+   card.appendChild(newImage)
+}
+
+/* 
+1. Iterate over image array and call makeCard() 
+2. Attach the result of .map to cardContainer to get cards to show on screen
+3. Add a toggle css class to each card when its being created
+4. toggle should display none to hide image
+5. Add an event listener to each card and remove the toggle class when clicked, this shows the image
+*/
