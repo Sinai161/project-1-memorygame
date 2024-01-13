@@ -31,30 +31,35 @@ const imageArray = [
 }
 ]
 
-// create a function that will randomize my cards 
-// function randomImage (imageArray) {
-//    imageArray[Math.floor(Math.random()* imageArray.length)]
-// }
-
-
-const cardContainer = document.getElementById("card-container")
-
-// 
-//    card.addEventListener("click",(event) => {
-//     if(event.target.classList.toggle("card"))
-//         alert("you clicked a card")
-//    })
-
 function makeCard(img) {
    // make card div
    const card = document.createElement('div')
-   card.classList.add('card')
+   card.classList.add("card")
    // make image
    const newImage = document.createElement("img")
-   newImage.setAttribute('src', img.path)
-   newImage.setAttribute('alt', img.name)
+   newImage.setAttribute("src", img.path)
+   newImage.setAttribute("alt", img.name)
    card.appendChild(newImage)
+   return card
 }
+
+const cardContainer = document.getElementById("card-container")
+imageArray.forEach((img)=>{
+   const card = makeCard(img)
+   cardContainer.appendChild(card)
+   console.log(card)
+})
+
+// function toggle() {
+//    const imgtoggle = document.getElementsByClassName("card")
+//    imgtoggle.classList.toggle("style")
+// }
+// toggle()
+
+// const cardContainer = document.getElementById("card-container")
+   // const showCard = imageArray.map((img) => img.path + img.name )
+   // cardContainer.showCard
+
 
 /* 
 1. Iterate over image array and call makeCard() 
@@ -63,3 +68,24 @@ function makeCard(img) {
 4. toggle should display none to hide image
 5. Add an event listener to each card and remove the toggle class when clicked, this shows the image
 */
+
+
+// create a function that will randomize my cards 
+// function randomImage (imageArray) {
+//    imageArray[Math.floor(Math.random()* imageArray.length)]
+// }
+
+
+// 
+//    card.addEventListener("click",(event) => {
+//     if(event.target.classList.toggle("card"))
+//         alert("you clicked a card")
+//    })
+
+// const image = document.createElement("img")
+// image.setAttribute("src",img.path)
+// image.setAttribute("alt",img.name)
+// cardContainer.appendChild(image)
+// console.log(image)
+
+
