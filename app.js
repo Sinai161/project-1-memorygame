@@ -39,6 +39,7 @@ function makeCard(img) {
    const newImage = document.createElement("img")
    newImage.setAttribute("src", img.path)
    newImage.setAttribute("alt", img.name)
+   newImage.classList.add("toggle")
    card.appendChild(newImage)
    return card
 }
@@ -50,25 +51,21 @@ imageArray.forEach((img)=>{
    console.log(card)
 })
 
-// function toggle() {
-//    const imgtoggle = document.getElementsByClassName("card")
-//    imgtoggle.classList.toggle("style")
+
+const cardToggle = document.querySelectorAll(".card")
+cardToggle.forEach((card) => {
+   card.addEventListener("click",() => {
+      let imgtoggle = document.getElementsByTagName("img")
+      imgtoggle[0].classList.toggle("toggle")
+   })
+})
+
+
+
+// let i = img
+// for (i  = 0; i < 12; i++) {
+//    cardContainer.appendChild(card)
 // }
-// toggle()
-
-// const cardContainer = document.getElementById("card-container")
-   // const showCard = imageArray.map((img) => img.path + img.name )
-   // cardContainer.showCard
-
-
-/* 
-1. Iterate over image array and call makeCard() 
-2. Attach the result of .map to cardContainer to get cards to show on screen
-3. Add a toggle css class to each card when its being created
-4. toggle should display none to hide image
-5. Add an event listener to each card and remove the toggle class when clicked, this shows the image
-*/
-
 
 // create a function that will randomize my cards 
 // function randomImage (imageArray) {
@@ -81,11 +78,5 @@ imageArray.forEach((img)=>{
 //     if(event.target.classList.toggle("card"))
 //         alert("you clicked a card")
 //    })
-
-// const image = document.createElement("img")
-// image.setAttribute("src",img.path)
-// image.setAttribute("alt",img.name)
-// cardContainer.appendChild(image)
-// console.log(image)
 
 
