@@ -1,4 +1,4 @@
-                                         # Project-1-Memorygame
+# Project-1-Memorygame
 
 # Animal Memory Game
 A fun and easy animal memory game where the objective is to match all the cards. Click on a card to start the game. Once all the cards have disappeared you won the game !
