@@ -3,114 +3,127 @@
 // If the cards do match I want them to stay flipped over 
 // I want there to be three tries until i have to restart the game and start over
 
-// array of images
+/* 
+1. set up a score variable to keep track
+2. when 2 cards are selected succesfully - add 1 point to the score
+3. grab the html element that holds our score
+4. update the html elements text to be "score:" + variable
+*/
+let score = 1;
+
+
+// array of data for img html element
 const imageArray = [
 { 
-   path:"assets/animal-7388186_1280.jpg",
-   name:"lemur",
+   src:"assets/animal-7388186_1280.jpg",
+   alt:"lemur",
    id: 0
 },
 {
-   path:"assets/cat-3169476_1280.jpg",
-   name: "cat",
+   src:"assets/cat-3169476_1280.jpg",
+   alt: "cat",
    id:1
 },
 {
-   path:"assets/dog-7758887_1280.webp",
-   name:"dog",
+   src:"assets/dog-7758887_1280.webp",
+   alt:"dog",
    id:2
 },
 {
-   path:"assets/ireland-1985088_1280.jpg",
-   name:"sheep",
+   src:"assets/ireland-1985088_1280.jpg",
+   alt:"sheep",
    id:3
 },
 {
-   path:"assets/lamb-292512_1280.jpg",
-   name:"lamb",
+   src:"assets/lamb-292512_1280.jpg",
+   alt:"lamb",
    id:4
 },
 {
-   path:"assets/meerkat-4821484_1280.jpg",
-   name:"meerkat",
+   src:"assets/meerkat-4821484_1280.jpg",
+   alt:"meerkat",
    id:5
 }
 ]
 
+// container for all of our cards to sit in
 const cardContainer = document.getElementById("card-container")
-const click = document.getElementsByTagName("img")
+
+// global variables for our game
 let cardsClicked = 0 
-let currentCard;
-// const Secondcard;
+let lastSelectedAnimal;
 
-
-// rename so it explains thats were creating many of
-function makeCardSet(img) {
+function makeCardPair(imgData) {
    const cards = [];
    for (let i = 0; i < 2 ; i++) {
       const card = document.createElement('div')
       card.classList.add("card")
       // make image
       const newImage = document.createElement("img")
-      newImage.setAttribute("src", img.path)
-      newImage.setAttribute("alt", img.name)
-      newImage.classList.add("flipImage")
+      newImage.setAttribute("src", imgData.src)
+      newImage.setAttribute("alt", imgData.alt)
+      newImage.classList.add("hideImage")
       card.appendChild(newImage)
       cards.push(card)
    }
     return cards
 }
 
-imageArray.forEach((img)=>{
-   const cards = makeCardSet(img)
-   cards.forEach(card => cardContainer.appendChild(card))
-})
 
+// Creates our cards, sorts them, and then adds them to our card container
+const generatedCards = imageArray.flatMap((img) => makeCardPair(img))
+generatedCards.sort(() => Math.random() - 0.5)
+generatedCards.forEach(card => cardContainer.appendChild(card))
+
+// get cards and then add our event listener with our game logic
 const cardToggle = document.querySelectorAll(".card")
 cardToggle.forEach((card) => {
    const imgtoggle = card.getElementsByTagName("img")
    card.addEventListener("click", (e) => {
-      console.log(e)
-      console.log(document.querySelectorAll('.card > img'))
       cardsClicked++
-      imgtoggle[0].classList.toggle("flipImage")
-      if (cardsClicked % 2 === 0 && currentCard === e.target.childNodes.img){
-         checkCard()
+      imgtoggle[0].classList.toggle("hideImage")
+
+      const targetAnimal = e.target.children[0].alt;
+
+      if (cardsClicked % 2 === 0 && lastSelectedAnimal === targetAnimal){
+         // run when 2 clicked cards match
+         removeMatches(targetAnimal)
+         document.getElementById("score").textContent = `Score: ${score ++}`
       }
+      if(cardsClicked % 2 === 0 && lastSelectedAnimal !== targetAnimal){
+         // run when 2 clicked cards dont match
+         flipWrongCards()
+      }
+
+      // if neither of our conditions are met, just update the global
+      lastSelectedAnimal = targetAnimal
    })
 })
 
-/* 
-Matching
-1. write a function that compares 2 cards - we might need a global variable that tracks the last card picked
-2. when a card is selected, store the "alt" in the variable
-3. when the second card is selected, check if the alt of the current card matches the global var
-4. if it matches, delete the evenListener otherwise reset the cards back to normal
-*/
-let cardNodes = document.querySelectorAll(".flipImage")
-function checkCard (animal) {
-   cardNodes.forEach((node) => {
-      if(node.alt === animal) {
-         node.remove()
-         cardNodes = document.querySelectorAll(".flipImage")
+let imgNodes = document.querySelectorAll(".hideImage")
+function removeMatches (animal) {
+   imgNodes.forEach((imgNode) => {
+      if(imgNode.alt === animal) {
+         //
+         setTimeout(() => {
+            imgNode.parentNode.remove()
+            imgNodes = document.querySelectorAll(".hideImage")
+         }, 1 * 1000)
       }
    })
 }
 
-
-// function matchCards () {
-//    console.log(getCards[0].getAttribute("alt"))
-//    // console.log(getCard[1])
-//       if(getCards[0].getAttribute("alt") === getCards[1].getAttribute("alt")) {
-      
-//    } else {
-//    console.log("wrong")
-//    }
-// }
-// matchCards()
-
-
-
-
-
-
+let imgClass = document.querySelectorAll("img")
+function flipWrongCards () {
+imgClass.forEach((img) => {
+   if(img.classList.contains("hideImage")) {
+      return;
+   } else {
+      // <img class>
+      // // <img class="hideImage">
+      setTimeout(() => {
+         img.classList.add("hideImage")
+      }, 750)
+   }
+})
+}
