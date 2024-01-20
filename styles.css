@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-color: #2b6777;
 }
 
 h1 {
@@ -24,6 +24,7 @@ h2 {
     height: 150px;
     width: 150px;
     margin: 20px;
+    background-color: #c8d8e4;
 }
 
 img {
@@ -38,5 +39,9 @@ button {
 }
 
 .hideImage{
+    display: none;
+}
+
+#win {
     display: none;
 }

@@ -9,7 +9,7 @@
 3. grab the html element that holds our score
 4. update the html elements text to be "score:" + variable
 */
-let score = 1;
+let score = 0;
 
 
 // array of data for img html element
@@ -88,7 +88,8 @@ cardToggle.forEach((card) => {
       if (cardsClicked % 2 === 0 && lastSelectedAnimal === targetAnimal){
          // run when 2 clicked cards match
          removeMatches(targetAnimal)
-         document.getElementById("score").textContent = `Score: ${score ++}`
+         document.getElementById("score").textContent = `Score: ${score = score + 1}`
+         checkWin()
       }
       if(cardsClicked % 2 === 0 && lastSelectedAnimal !== targetAnimal){
          // run when 2 clicked cards dont match
@@ -99,7 +100,6 @@ cardToggle.forEach((card) => {
       lastSelectedAnimal = targetAnimal
    })
 })
-
 let imgNodes = document.querySelectorAll(".hideImage")
 function removeMatches (animal) {
    imgNodes.forEach((imgNode) => {
@@ -119,11 +119,10 @@ imgClass.forEach((img) => {
    if(img.classList.contains("hideImage")) {
       return;
    } else {
-      // <img class>
-      // // <img class="hideImage">
       setTimeout(() => {
          img.classList.add("hideImage")
       }, 750)
    }
 })
 }
+
