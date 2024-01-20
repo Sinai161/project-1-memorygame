@@ -1,17 +1,4 @@
-// Add event listener so when I click on the card it turns over 
-// If the cards do not match I want them to turn back around
-// If the cards do match I want them to stay flipped over 
-// I want there to be three tries until i have to restart the game and start over
-
-/* 
-1. set up a score variable to keep track
-2. when 2 cards are selected succesfully - add 1 point to the score
-3. grab the html element that holds our score
-4. update the html elements text to be "score:" + variable
-*/
 let score = 0;
-
-
 // array of data for img html element
 const imageArray = [
 { 
@@ -72,7 +59,9 @@ function makeCardPair(imgData) {
 
 // Creates our cards, sorts them, and then adds them to our card container
 const generatedCards = imageArray.flatMap((img) => makeCardPair(img))
+//
 generatedCards.sort(() => Math.random() - 0.5)
+// 
 generatedCards.forEach(card => cardContainer.appendChild(card))
 
 // get cards and then add our event listener with our game logic
@@ -89,7 +78,6 @@ cardToggle.forEach((card) => {
          // run when 2 clicked cards match
          removeMatches(targetAnimal)
          document.getElementById("score").textContent = `Score: ${score = score + 1}`
-         checkWin()
       }
       if(cardsClicked % 2 === 0 && lastSelectedAnimal !== targetAnimal){
          // run when 2 clicked cards dont match
@@ -98,6 +86,7 @@ cardToggle.forEach((card) => {
 
       // if neither of our conditions are met, just update the global
       lastSelectedAnimal = targetAnimal
+      checkWin()
    })
 })
 let imgNodes = document.querySelectorAll(".hideImage")
@@ -126,3 +115,9 @@ imgClass.forEach((img) => {
 })
 }
 
+function checkWin () {
+   const win = document.getElementById("win")
+   if(score === 6) {
+      win.removeAttribute("id")
+   }
+}
