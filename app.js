@@ -1,4 +1,5 @@
 let score = 0;
+let attempt = 3
 // array of data for img html element
 const imageArray = [
 { 
@@ -81,19 +82,19 @@ cardToggle.forEach((card) => {
       }
       if(cardsClicked % 2 === 0 && lastSelectedAnimal !== targetAnimal){
          // run when 2 clicked cards dont match
+         document.getElementById("attempt").textContent = `Attempts: ${attempt = attempt - 1}`
          flipWrongCards()
       }
-
       // if neither of our conditions are met, just update the global
       lastSelectedAnimal = targetAnimal
       checkWin()
+      checkloss()
    })
 })
 let imgNodes = document.querySelectorAll(".hideImage")
 function removeMatches (animal) {
    imgNodes.forEach((imgNode) => {
       if(imgNode.alt === animal) {
-         //
          setTimeout(() => {
             imgNode.parentNode.remove()
             imgNodes = document.querySelectorAll(".hideImage")
@@ -119,5 +120,13 @@ function checkWin () {
    const win = document.getElementById("win")
    if(score === 6) {
       win.removeAttribute("id")
+   }
+}
+
+function checkloss () {
+   const loss = document.getElementById("loss")
+   if(attempt === 0) {
+      loss.removeAttribute("id")
+      cardContainer.style.visibility = "hidden"
    }
 }
